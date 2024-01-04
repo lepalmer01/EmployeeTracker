@@ -211,3 +211,50 @@ function addEmployee() {
   })
 })
       }
+
+// Function to update Employee Role
+function updateEmployeeRole(){
+    db.query(`SELECT * FROM role`, (err,res)=>{
+        if (err) throw(err)
+        let roles = res.map((role)=>({
+            name: role.title,
+            value:role.id
+    }))
+    db.query(`SELECT * FROM employee`, (err,res)=>{
+        if (err) throw(err)
+        let employees = res.map((employee)=>({
+            name: `${employee.first_name} ${employee.last_name}`,
+            value:employee.id
+    }))
+
+    inquirer.prompt([
+        {
+            type:'list',
+            name:"employeeId",
+            message:"Select employee whose role will be updated:",
+            choices:employees
+        },
+        {
+            type:'list',
+            name:"roleId",
+            message:"Select new role for employee:",
+            choices:roles
+
+        }
+    ]).then((employee)=>{
+        const query= `UPDATE employee SET ? WHERE ?`
+        db.query(query, [
+            {role_id:employee.roleId},
+            {id: employee.employeeId}
+        ], (err, res)=>{
+            if(err) throw err
+            console.log(`${employee.employeeId}'s role was successfully updated`);
+            startApp()
+        })
+    })
+})
+})
+}
+
+
+startApp()
