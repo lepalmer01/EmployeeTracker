@@ -12,7 +12,7 @@ To start the application, run the following command in your project folder: node
 
 ## Walkthrough Video
 
-Please refer to this walkthrough video to see the functionality of the application in action.
+Please refer to this [walkthrough video](https://drive.google.com/file/d/1bWUlwm5n4K_CTOPVbD5Nv4gcgCvLWQ4Q/view) to see the functionality of the application in action.
 
 ## Questions
 
